@@ -88,7 +88,7 @@ resource "aws_instance" "four" {
 resource "aws_security_group" "five" {
   name = "elb-sg"
   ingress {
- from_port   = 22
+    from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
@@ -118,5 +118,19 @@ for_each = var.user_names
 name = each.value
 }
 
+variable "user_names" {
+description = "*"
+type = set(string)
+default = ["user1", "user2", "user3", "user4"]
+}
+
+resource "aws_ebs_volume" "eight" {
+ availability_zone = "us-east-1a"
+  size = 40
+  tags = {
+    Name = "ebs-001"
+  }
+}
+     
 
                                          
